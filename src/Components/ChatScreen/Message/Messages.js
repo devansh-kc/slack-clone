@@ -14,7 +14,6 @@ function Messages({ message, user, timestamp, userImage, id, roomid }) {
       .collection("messages")
       .doc(id)
       .delete()
-      .then(console.log("deleted sucessffully"))
       .catch((err) => console.log(err));
   }
   return (

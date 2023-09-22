@@ -24,7 +24,6 @@ function Chat() {
       .collection("messages")
       .orderBy("timestamp", "asc")
       .onSnapshot((snapshot) => {
-        console.log(snapshot.docs);
         const mesageData = snapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
@@ -32,7 +31,6 @@ function Chat() {
         setRoomMessages(mesageData);
       });
   }, [roomId]);
-  console.log(roomMessages);
 
   return (
     <div className="chat">
