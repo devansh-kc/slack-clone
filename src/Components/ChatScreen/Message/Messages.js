@@ -8,7 +8,6 @@ import db from "../../../firebase";
 
 function Messages({ message, user, timestamp, userImage, id, roomid }) {
   function performDelete() {
-    console.log(id);
     db.collection("rooms")
       .doc(roomid)
       .collection("messages")
