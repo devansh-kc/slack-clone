@@ -24,9 +24,15 @@ function Chat() {
       .collection("messages")
       .orderBy("timestamp", "asc")
       .onSnapshot((snapshot) => {
-        setRoomMessages(snapshot.docs.map((doc) => doc.data()));
+        console.log(snapshot.docs);
+        const mesageData = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setRoomMessages(mesageData);
       });
   }, [roomId]);
+  console.log(roomMessages);
 
   return (
     <div className="chat">
@@ -45,16 +51,16 @@ function Chat() {
         </div>
       </div>
       <div className="chat__messages">
-        {roomMessages?.map(
-          ({ message, user, timestamp, userImage, userDataWriter }) => (
-            <Messages
-              message={message}
-              user={user}
-              timestamp={timestamp}
-              userImage={userImage}
-            />
-          )
-        )}
+        {roomMessages?.map(({ message, user, timestamp, userImage, id }) => (
+          <Messages
+            id={id}
+            message={message}
+            user={user}
+            timestamp={timestamp}
+            userImage={userImage}
+            roomid={roomId}
+          />
+        ))}
       </div>
       <ChatInput channelName={roomDetails?.name} channelId={roomId} />
     </div>
